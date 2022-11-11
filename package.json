@@ -1,6 +1,6 @@
 {
   "name": "mojo-plugin-nunjucks",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Adds nunjucks template support to mojo.js",
   "keywords": [
     "mojojs",
