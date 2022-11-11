@@ -60,6 +60,7 @@
     "build:watch": "npm run build -- --watch",
     "clean": "rm -rf tsconfig.tsbuildinfo lib",
     "coverage": "c8 tap --no-coverage test/*.js",
+    "coverage:ci": "c8 --reporter lcovonly tap --no-coverage test/*.js",
     "lint": "eslint \"test/*.js\" \"src/*.ts\"",
     "publish:minor": "npm version minor && npm publish",
     "publish:patch": "npm version patch && npm publish",
