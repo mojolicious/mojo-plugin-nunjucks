@@ -8,6 +8,7 @@
 </p>
 
 [![](https://github.com/mojolicious/mojo-plugin-nunjucks/workflows/test/badge.svg)](https://github.com/mojolicious/mojo-plugin-nunjucks/actions)
+[![Coverage Status](https://coveralls.io/repos/github/mojolicious/mojo-plugin-nunjucks/badge.svg?branch=main)](https://coveralls.io/github/mojolicious/mojo-plugin-nunjucks?branch=main)
 [![npm](https://img.shields.io/npm/v/mojo-plugin-nunjucks.svg)](https://www.npmjs.com/package/mojo-plugin-nunjucks)
 
 A mojo.js plugin that adds support for [nunjucks](https://www.npmjs.com/package/nunjucks) templates. The code of this
