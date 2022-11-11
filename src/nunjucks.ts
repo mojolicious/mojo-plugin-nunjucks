@@ -13,7 +13,7 @@ export default function nunjucksPlugin(app: MojoApp, options: {name?: string} = 
 }
 
 class NunjucksEngine {
-  cache: LRU<string, any>;
+  cache: LRU<string, nunjucks.Template>;
   env: any;
 
   constructor(app: MojoApp) {
@@ -22,7 +22,7 @@ class NunjucksEngine {
   }
 
   async render(ctx: MojoContext, options: MojoRenderOptions) {
-    let template;
+    let template: any;
 
     if (options.inline !== undefined) {
       const checksum = createHash('md5').update(options.inline).digest('hex');
@@ -43,7 +43,12 @@ class NunjucksEngine {
       }
     }
 
-    return Buffer.from(template.render({...ctx.stash, stash: ctx.stash, ctx, view: options}));
+    const result: string = await new Promise((resolve, reject) => {
+      template.render({...ctx.stash, stash: ctx.stash, ctx, view: options}, (err: any, result: string) => {
+        err != null ? reject(err) : resolve(result);
+      });
+    });
+    return Buffer.from(result);
   }
 }
 
@@ -56,7 +61,7 @@ class NunjucksLoader {
 
   getSource(name: string): {src: string; path: string; noCache: boolean} {
     const suggestion = this.app.renderer.findView({view: name});
-    if (suggestion === null) return {src: '', path: 'unknown', noCache: true};
+    if (suggestion === null) return {src: 'Template not found', path: 'unknown', noCache: true};
     const path = suggestion.path;
     return {src: new Path(path).readFileSync().toString(), path, noCache: false};
   }

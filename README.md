@@ -43,6 +43,14 @@ app.plugin(nunjucksPlugin, {name: 'foo'});
 app.renderer.defaultEngine = 'foo';
 ```
 
+You can also extend the environment with custom filters and tags.
+
+```js
+app.renderer.engines.njk.env.addFilter('hello', name => {
+  return `hello ${name}`;
+});
+```
+
 ## Installation
 
 All you need is Node.js 16.0.0 (or newer).

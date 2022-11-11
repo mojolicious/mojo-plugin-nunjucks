@@ -8,6 +8,18 @@ t.test('nunjucksPlugin', async t => {
   app.plugin(nunjucksPlugin);
   app.plugin(nunjucksPlugin, {name: 'foo'});
 
+  app.renderer.engines.foo.env.addFilter('hello', name => {
+    return `hello ${name}`;
+  });
+
+  app.renderer.engines.foo.env.addFilter(
+    'helloAsync',
+    (name, callback) => {
+      setTimeout(() => callback(undefined, `hello ${name}`), 500);
+    },
+    true
+  );
+
   app.renderer.viewPaths.push(Path.currentFile().sibling('support', 'views').toString());
 
   app.get('/', async ctx => {
@@ -16,6 +28,14 @@ t.test('nunjucksPlugin', async t => {
 
   app.get('/inline', async ctx => {
     await ctx.render({inline: '{{ greeting }} World!', engine: 'njk'}, {greeting: 'Hello'});
+  });
+
+  app.get('/inline/filter', async ctx => {
+    await ctx.render({inline: '{{ name|hello }}!', engine: 'foo'}, {name: 'kraih'});
+  });
+
+  app.get('/inline/filter/async', async ctx => {
+    await ctx.render({inline: '{{ name|helloAsync }}!', engine: 'foo'}, {name: 'hiark'});
   });
 
   app.get('/child', async ctx => {
@@ -30,6 +50,14 @@ t.test('nunjucksPlugin', async t => {
 
   await t.test('Inline template', async () => {
     (await ua.getOk('/inline')).statusIs(200).bodyLike(/Hello World/);
+  });
+
+  await t.test('Inline template (custom filter)', async () => {
+    (await ua.getOk('/inline/filter')).statusIs(200).bodyLike(/hello kraih/);
+  });
+
+  await t.test('Inline template (custom async filter)', async () => {
+    (await ua.getOk('/inline/filter/async')).statusIs(200).bodyLike(/hello hiark/);
   });
 
   await t.test('Template inheritance', async () => {
