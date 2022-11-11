@@ -1,25 +1,8 @@
-import type {MojoApp, MojoContext} from '@mojojs/core';
+import type {MojoApp, MojoContext, MojoRenderOptions} from '@mojojs/core';
 import {createHash} from 'node:crypto';
 import Path from '@mojojs/path';
 import LRU from 'lru-cache';
 import nunjucks from 'nunjucks';
-
-interface RenderOptions {
-  engine?: string;
-  format?: string;
-  inline?: string;
-  inlineLayout?: string;
-  json?: any;
-  layout?: string;
-  maybe?: boolean;
-  pretty?: boolean;
-  status?: number;
-  text?: string;
-  variant?: string;
-  view?: string;
-  yaml?: any;
-  [key: string]: any;
-}
 
 /**
  * Adds nunjucks template support to mojo.js.
@@ -36,7 +19,7 @@ class NunjucksEngine {
     this.cache = new LRU({max: 100});
   }
 
-  async render(ctx: MojoContext, options: RenderOptions) {
+  async render(ctx: MojoContext, options: MojoRenderOptions) {
     let template;
 
     if (options.inline !== undefined) {
