@@ -50,6 +50,7 @@
   "bugs": {
     "url": "https://github.com/mojolicious/mojo-plugin-nunjucks/issues"
   },
+  "homepage": "https://mojojs.org",
   "scripts": {
     "build": "npx tsc --build ./",
     "build:clean": "npm run clean && npm run build",
