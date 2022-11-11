@@ -18,6 +18,10 @@ t.test('nunjucksPlugin', async t => {
     await ctx.render({inline: '{{ greeting }} World!', engine: 'njk'}, {greeting: 'Hello'});
   });
 
+  app.get('/child', async ctx => {
+    await ctx.render({view: 'child', engine: 'njk'});
+  });
+
   const ua = await app.newTestUserAgent({tap: t});
 
   await t.test('Plain template', async () => {
@@ -26,6 +30,12 @@ t.test('nunjucksPlugin', async t => {
 
   await t.test('Inline template', async () => {
     (await ua.getOk('/inline')).statusIs(200).bodyLike(/Hello World/);
+  });
+
+  await t.test('Template inheritance', async () => {
+    (await ua.getOk('/child'))
+      .statusIs(200)
+      .bodyLike(/default content.+This is the left side!.+This is the right side!/s);
   });
 
   await ua.stop();
