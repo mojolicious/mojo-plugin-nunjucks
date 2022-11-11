@@ -1,0 +1,68 @@
+{
+  "name": "mojo-plugin-nunjucks",
+  "version": "0.0.1",
+  "description": "Adds nunjucks template support to mojo.js",
+  "keywords": [
+    "mojojs",
+    "nunjucks",
+    "njk",
+    "html"
+  ],
+  "dependencies": {
+    "@mojojs/core": "^0.33.2",
+    "@mojojs/path": "^1.4.2",
+    "lru-cache": "^7.10.1",
+    "nunjucks": "^3.2.3"
+  },
+  "type": "module",
+  "author": "Sebastian Riedel <s@kraih.com>",
+  "devDependencies": {
+    "@types/busboy": "^1.5.0",
+    "@types/js-yaml": "^4.0.3",
+    "@types/mime-types": "^2.1.0",
+    "@types/node": "^18.0.0",
+    "@types/nopt": "^3.0.29",
+    "@types/nunjucks": "^3.2.1",
+    "@types/stack-utils": "^2.0.1",
+    "@types/tap": "^15.0.7",
+    "@types/tough-cookie": "^4.0.2",
+    "@types/ws": "^8.5.3",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "c8": "^7.11.3",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "tap": "^16.3.0",
+    "typescript": "^4.7.0"
+  },
+  "exports": "./lib/nunjucks.js",
+  "files": [
+    "lib/"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojolicious/mojo-plugin-nunjucks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mojolicious/mojo-plugin-nunjucks/issues"
+  },
+  "scripts": {
+    "build": "npx tsc --build ./",
+    "build:clean": "npm run clean && npm run build",
+    "build:coverage": "npm run build && npm run coverage",
+    "build:lint": "npm run build && npm run lint",
+    "build:node": "npm run build && node",
+    "build:test": "npm run build && npm test",
+    "build:watch": "npm run build -- --watch",
+    "clean": "rm -rf tsconfig.tsbuildinfo lib",
+    "coverage": "c8 tap --no-coverage test/*.js",
+    "lint": "eslint \"test/*.js\" \"src/*.ts\"",
+    "publish:minor": "npm version minor && npm publish",
+    "publish:patch": "npm version patch && npm publish",
+    "test": "tap --no-coverage test/*.js"
+  }
+}
