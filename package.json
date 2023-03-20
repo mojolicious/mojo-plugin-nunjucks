@@ -11,7 +11,7 @@
   "dependencies": {
     "@mojojs/core": "^1.11.0",
     "@mojojs/path": "^1.4.2",
-    "lru-cache": "^7.10.1",
+    "lru-cache": "^8.0.4",
     "nunjucks": "^3.2.3"
   },
   "type": "module",
