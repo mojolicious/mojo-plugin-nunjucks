@@ -20,7 +20,7 @@
     "@types/busboy": "^1.5.0",
     "@types/js-yaml": "^4.0.3",
     "@types/mime-types": "^2.1.0",
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.1.1",
     "@types/nopt": "^3.0.29",
     "@types/nunjucks": "^3.2.1",
     "@types/stack-utils": "^2.0.1",
