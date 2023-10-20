@@ -20,23 +20,23 @@
     "@types/busboy": "^1.5.0",
     "@types/js-yaml": "^4.0.3",
     "@types/mime-types": "^2.1.0",
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.0.0",
     "@types/nopt": "^3.0.29",
     "@types/nunjucks": "^3.2.1",
     "@types/stack-utils": "^2.0.1",
     "@types/tap": "^15.0.7",
     "@types/tough-cookie": "^4.0.2",
     "@types/ws": "^8.5.3",
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "c8": "^7.11.3",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "c8": "^8.0.0",
     "eslint": "^8.17.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.6.2",
-    "tap": "^16.3.0",
-    "typescript": "^4.7.0"
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "tap": "^18.5.0",
+    "typescript": "^5.0.0"
   },
   "exports": "./lib/nunjucks.js",
   "files": [
@@ -60,11 +60,11 @@
     "build:test": "npm run build && npm test",
     "build:watch": "npm run build -- --watch",
     "clean": "rm -rf tsconfig.tsbuildinfo lib",
-    "coverage": "c8 tap --no-coverage test/*.js",
-    "coverage:ci": "c8 --reporter lcovonly tap --no-coverage test/*.js",
+    "coverage": "c8 tap --disable-coverage --allow-empty-coverage test/*.js",
+    "coverage:ci": "c8 --reporter lcovonly tap --disable-coverage --allow-empty-coverage test/*.js",
     "lint": "eslint \"test/*.js\" \"src/*.ts\"",
     "publish:minor": "npm version minor && npm publish",
     "publish:patch": "npm version patch && npm publish",
-    "test": "tap --no-coverage test/*.js"
+    "test": "tap --disable-coverage --allow-empty-coverage test/*.js"
   }
 }
